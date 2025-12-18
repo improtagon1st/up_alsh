@@ -1,0 +1,131 @@
+﻿<Window x:Class="up_melnilov_522.Windows.ProductsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Список товаров"
+        Width="1100" Height="650"
+        WindowStartupLocation="CenterScreen"
+        Background="White">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+ 
+        <Grid Grid.Row="0" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Width="90" Height="45" Stretch="Uniform"
+                   Source="pack://application:,,,/Resources/logo.png"/>
+
+     
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                <Button x:Name="BtnOrders" Content="Заказы" Padding="10,6" Margin="0,0,8,0" Click="BtnOrders_Click"/>
+                <Button x:Name="BtnAdd" Content="Добавить товар" Padding="10,6" Margin="0,0,8,0" Click="BtnAdd_Click"/>
+                <Button x:Name="BtnDelete" Content="Удалить" Padding="10,6" Margin="0,0,8,0" Click="BtnDelete_Click"/>
+            </StackPanel>
+
+            <TextBlock Grid.Column="2"
+                       x:Name="TbUser"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"
+                       Margin="0,0,12,0"/>
+
+      
+            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            
+                <Button x:Name="BtnExit" Content="Выход" Padding="12,6" Click="Logout_Click"/>
+            </StackPanel>
+        </Grid>
+
+
+        <WrapPanel x:Name="PanelControls" Grid.Row="1" Margin="0,0,0,12" VerticalAlignment="Center">
+            <TextBlock Text="Поиск:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBox x:Name="TbSearch" Width="260" Height="28" Margin="0,0,16,0"
+                     TextChanged="TbSearch_TextChanged"/>
+
+            <TextBlock Text="Поставщик:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <ComboBox x:Name="CbSupplier" Width="220" Height="28" Margin="0,0,16,0"
+                      SelectionChanged="CbSupplier_SelectionChanged"/>
+
+            <TextBlock Text="Остаток:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <ComboBox x:Name="CbStockSort" Width="220" Height="28"
+                      SelectionChanged="CbStockSort_SelectionChanged"/>
+        </WrapPanel>
+
+   
+        <ListView Grid.Row="2"
+                  x:Name="LvProducts"
+                  BorderThickness="0"
+                  MouseDoubleClick="LvProducts_MouseDoubleClick">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black" Padding="10" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Фото -->
+                            <Border BorderThickness="1" BorderBrush="Black" Width="150" Height="110">
+                                <Image Stretch="UniformToFill" Source="{Binding PhotoImage}"/>
+                            </Border>
+
+                            <!-- Инфо -->
+                            <StackPanel Grid.Column="1" Margin="12,0,12,0">
+                                <TextBlock FontWeight="Bold" FontSize="16">
+                                    <Run Text="{Binding CategoryName}"/>
+                                    <Run Text=" | "/>
+                                    <Run Text="{Binding ProductName}"/>
+                                </TextBlock>
+
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,6,0,6"/>
+
+                                <TextBlock Text="{Binding ManufacturerLine}"/>
+                                <TextBlock Text="{Binding SupplierLine}"/>
+
+ 
+                                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                    <TextBlock Text="Цена: "/>
+
+                                    <TextBlock Text="{Binding OldPriceText}"
+                                               Foreground="Red"
+                                               TextDecorations="Strikethrough"
+                                               Margin="0,0,8,0"
+                                               Visibility="{Binding HasDiscount, Converter={StaticResource BoolToVis}}"/>
+
+                                    <TextBlock Text="{Binding PriceText}" Foreground="Black"/>
+                                </StackPanel>
+
+                                <TextBlock Margin="0,6,0,0" Text="{Binding UnitLine}"/>
+                                <TextBlock Text="{Binding StockLine}"/>
+                            </StackPanel>
+
+                        
+                            <Border Grid.Column="2" BorderThickness="1" BorderBrush="Black" Padding="8">
+                                <TextBlock Text="{Binding DiscountLine}" TextWrapping="Wrap"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>

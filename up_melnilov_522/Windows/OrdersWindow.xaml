@@ -1,0 +1,67 @@
+﻿<Window x:Class="up_melnilov_522.Windows.OrdersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Заказы"
+        Width="950" Height="650"
+        WindowStartupLocation="CenterOwner"
+        Background="White">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя панель -->
+        <Grid Grid.Row="0" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Button x:Name="BtnAddOrder" Content="Добавить заказ" Padding="12,6" Margin="0,0,8,0"
+                        Click="BtnAddOrder_Click"/>
+                <Button x:Name="BtnDeleteOrder" Content="Удалить" Padding="12,6" Margin="0,0,8,0"
+                        Click="BtnDeleteOrder_Click"/>
+                <Button Content="Закрыть" Padding="12,6" Click="BtnClose_Click"/>
+            </StackPanel>
+
+            <TextBlock Grid.Column="1" x:Name="TbUser"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"/>
+        </Grid>
+
+        <!-- Список заказов (карточками по макету) -->
+        <ListView Grid.Row="1" x:Name="LvOrders" BorderThickness="0"
+                  MouseDoubleClick="LvOrders_MouseDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black" Padding="10" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="160"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Левая часть -->
+                            <Border BorderThickness="1" BorderBrush="Black" Padding="10" Margin="0,0,10,0">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding ArticleLine}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding StatusLine}" Margin="0,4,0,0"/>
+                                    <TextBlock Text="{Binding PickupAddressLine}" Margin="0,4,0,0"/>
+                                    <TextBlock Text="{Binding OrderDateLine}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Правая часть -->
+                            <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black" Padding="10">
+                                <TextBlock Text="{Binding DeliveryDateText}" TextWrapping="Wrap"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>

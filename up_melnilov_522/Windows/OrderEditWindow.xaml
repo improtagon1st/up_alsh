@@ -1,0 +1,56 @@
+﻿<Window x:Class="up_melnilov_522.Windows.OrderEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Заказ"
+        Width="520" Height="420"
+        WindowStartupLocation="CenterOwner"
+        Background="White">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Артикул -->
+                <RowDefinition Height="Auto"/>
+                <!-- Статус -->
+                <RowDefinition Height="Auto"/>
+                <!-- Адрес -->
+                <RowDefinition Height="Auto"/>
+                <!-- Дата заказа -->
+                <RowDefinition Height="Auto"/>
+                <!-- Дата выдачи -->
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="LblArticle" Grid.Row="0" Grid.Column="0" Text="Артикул:" Margin="0,0,10,12" VerticalAlignment="Center"/>
+            <TextBox x:Name="TbArticle" Grid.Row="0" Grid.Column="1" Height="28" Margin="0,0,0,12" IsReadOnly="True"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Статус заказа:" Margin="0,0,10,12" VerticalAlignment="Center"/>
+            <ComboBox x:Name="CbStatus" Grid.Row="1" Grid.Column="1" Height="28" Margin="0,0,0,12"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Адрес пункта выдачи:" Margin="0,0,10,12" VerticalAlignment="Top"/>
+            <TextBox x:Name="TbPickupAddress" Grid.Row="2" Grid.Column="1" Height="60" Margin="0,0,0,12"
+                     TextWrapping="Wrap" AcceptsReturn="True"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Дата заказа:" Margin="0,0,10,12" VerticalAlignment="Center"/>
+            <DatePicker x:Name="DpOrderDate" Grid.Row="3" Grid.Column="1" Height="28" Margin="0,0,0,12"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата выдачи:" Margin="0,0,10,0" VerticalAlignment="Center"/>
+            <DatePicker x:Name="DpDeliveryDate" Grid.Row="4" Grid.Column="1" Height="28"/>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Назад" Padding="12,6" Margin="0,0,10,0" Click="BtnBack_Click"/>
+            <Button Content="Сохранить" Padding="12,6" Background="#00FA9A" BorderBrush="#00FA9A" Click="BtnSave_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
